@@ -1,16 +1,13 @@
 package com.kt.service;
 
-import java.util.concurrent.TimeUnit;
-
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kt.common.CustomException;
 import com.kt.common.ErrorCode;
 import com.kt.common.Lock;
 import com.kt.common.Preconditions;
-import com.kt.config.RedisProperties;
 import com.kt.domain.order.Order;
 import com.kt.domain.order.Receiver;
 import com.kt.domain.orderproduct.OrderProduct;

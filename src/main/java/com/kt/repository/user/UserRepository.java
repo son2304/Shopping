@@ -1,5 +1,7 @@
 package com.kt.repository.user;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +23,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// 찾는다 : findByXX , 존재하는가 : existsByXX, 삭제 : deleteByXX ....
 
 	Boolean existsByLoginId(String loginId);
+
+	Optional<User> findByLoginId(String loginId);
 
 	@Query(value = """
 SELECT exists (SELECT u FROM User u WHERE u.loginId = ?1)
