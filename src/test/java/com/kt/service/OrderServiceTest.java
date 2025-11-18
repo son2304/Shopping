@@ -103,9 +103,10 @@ class OrderServiceTest {
 	}
 
 	@Test
-	void 동시에_100명_주문() throws InterruptedException {
+	void 동시에_100명_주문() throws Exception {
+		var repeatCount = 500;
 		var userList = new ArrayList<User>();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < repeatCount; i++) {
 			userList.add(new User(
 				"testuser" + i,
 				"password",
@@ -130,13 +131,15 @@ class OrderServiceTest {
 			)
 		);
 
+		productRepository.flush();
+
 		// 동시에 주문해야하니까 스레드를 100개
 		var executorService = Executors.newFixedThreadPool(100);
-		var countDownLatch = new CountDownLatch(100);
+		var countDownLatch = new CountDownLatch(repeatCount);
 		AtomicInteger successCount = new AtomicInteger(0);
 		AtomicInteger failureCount = new  AtomicInteger(0);
 
-		for(int i = 0; i < 100; i++) {
+		for(int i = 0; i < repeatCount; i++) {
 			int finalI = i;
 			executorService.submit(()->{
 				try{
@@ -151,6 +154,7 @@ class OrderServiceTest {
 					);
 					successCount.incrementAndGet();
 				} catch(RuntimeException e) {
+					e.printStackTrace();
 					failureCount.incrementAndGet();
 				} finally {
 					countDownLatch.countDown();
@@ -163,11 +167,8 @@ class OrderServiceTest {
 
 		var foundedProduct = productRepository.findByIdOrThrow(product.getId());
 
-		System.out.println(successCount.get());
-		System.out.println(failureCount.get());
-
 		assertThat(successCount.get()).isEqualTo(10);
-		assertThat(failureCount.get()).isEqualTo(90);
+		assertThat(failureCount.get()).isEqualTo(490);
 		assertThat(foundedProduct.getStock()).isEqualTo(0L);
 
 	}

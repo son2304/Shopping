@@ -1,13 +1,11 @@
 spring:
-  data:
-    redis:
-      host: ${redis.host:localhost}
-      port: ${redis.host:6379}
   datasource:
     url: jdbc:mysql://localhost:3306/shopping-test
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 1000
   jpa:
     hibernate:
       #create = 테이블을 만들기만
@@ -22,5 +20,9 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         jdbc:
           time_zone: Asia/Seoul
-        show_sql: true #로컬에서만
-    show-sql: true
+        show_sql: false
+    show-sql: false
+  data:
+    redis:
+      host: ${redis.host:localhost}
+      port: ${redis.host:6379}

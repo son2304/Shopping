@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 public class RedisConfiguration {
+	private final RedisProperties redisProperties;
 	// redisson에서 분산락 동작은
 	// DB에 접근하기 전에 락을 획득하고 redis <key, value>에 저장
 	// 작업 수행
@@ -20,8 +22,9 @@ public class RedisConfiguration {
 	@Bean
 	public RedissonClient redissonClient() {
 		var config = new Config();
+		var uri = String.format("redis://%s:%s", redisProperties.getHost(), redisProperties.getPort());
 
-		config.useSingleServer();
+		config.useSingleServer().setAddress(uri);
 
 		return Redisson.create(config);
 	}
