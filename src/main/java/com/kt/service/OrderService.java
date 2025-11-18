@@ -33,7 +33,7 @@ public class OrderService {
 	private final RedisProperties redisProperties;
 
 	// 주문 생성
-	@Lock(key = Lock.Key.STOCK)
+	@Lock(key = Lock.Key.STOCK, index = 1)
 	public void create(
 		Long userId,
 		Long productId,

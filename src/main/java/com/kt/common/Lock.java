@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 public @interface Lock {
 	Key key();
 
+	int index() default 0;
+
 	long waitTime() default 2L;
 
 	long leaseTime() default 1L;
