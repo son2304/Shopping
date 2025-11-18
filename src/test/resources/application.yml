@@ -1,4 +1,8 @@
 spring:
+  data:
+    redis:
+      host: ${redis.host:localhost}
+      port: ${redis.host:6379}
   datasource:
     url: jdbc:mysql://localhost:3306/shopping-test
     username: root
