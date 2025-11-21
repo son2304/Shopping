@@ -51,6 +51,7 @@ public class User extends BaseEntity {
 		this.birthday = birthday;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.role = role;
 	}
 
 	public static User normalUser(String loginId, String password, String name, String email, String mobile,
