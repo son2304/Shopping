@@ -36,14 +36,12 @@ SELECT exists (SELECT u FROM User u WHERE u.loginId = ?1)
 
 	Page<User> findAllByNameContaining(String name, Pageable pageable);
 
-	// @Query("""
-	// 	SELECT DISTINCT u FROM User u
-	// 	LEFT JOIN FETCH u.orders o
-	// 	WHERE u.id = :id
-	// """)
-	// @NotNull Optional<User> findById(@NotNull Long id);
+	@Query(value = """
+	SELECT DISTINCT u FROM User u
+		LEFT JOIN FETCH u.orders o
+			WHERE u.id = :id
 
-	@EntityGraph(attributePaths = "orders")
+	""")
 	@NotNull Optional<User> findById(@NotNull Long id);
 
 	default User findByIdOrThrow(Long id, ErrorCode errorCode) {

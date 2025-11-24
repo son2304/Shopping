@@ -17,7 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 	// 4. 조회할때는 동적쿼리를 작성하게 해줄 수 있는 querydsl 사용하자
 
 	@NotNull
-	@EntityGraph(attributePaths = {"orderProducts", "orderProduct.product"})
+	@EntityGraph(attributePaths = {"orderProducts", "orderProducts.product"})
 	List<Order> findAllByUserId(Long userId);
 
 }
