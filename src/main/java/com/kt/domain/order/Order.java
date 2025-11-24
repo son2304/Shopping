@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
+
 import com.kt.common.BaseEntity;
 import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.domain.user.User;
@@ -44,6 +46,7 @@ public class Order extends BaseEntity {
 	// 하나의 사품은 여러개의 오더 가능
 
 	@OneToMany(mappedBy = "order")
+	//@BatchSize(size = 2)
 	private List<OrderProduct> orderProducts = new ArrayList<>();
 
 	private Order(Receiver receiver, User user) {
