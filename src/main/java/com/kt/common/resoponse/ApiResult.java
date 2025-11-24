@@ -1,4 +1,4 @@
-package com.kt.common;
+package com.kt.common.resoponse;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

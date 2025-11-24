@@ -1,8 +1,6 @@
 package com.kt.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,11 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kt.common.ErrorCode;
-import com.kt.common.Preconditions;
-import com.kt.domain.order.Order;
-import com.kt.domain.orderproduct.OrderProduct;
-import com.kt.domain.product.Product;
+import com.kt.common.exception.ErrorCode;
+import com.kt.common.support.Preconditions;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.repository.order.OrderRepository;
