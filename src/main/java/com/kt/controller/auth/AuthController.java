@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.resoponse.ApiResult;
+import com.kt.common.support.TechUpLogger;
+import com.kt.domain.history.HistoryType;
 import com.kt.dto.auth.LoginRequest;
 import com.kt.dto.auth.LoginResponse;
 import com.kt.service.AuthService;
@@ -32,6 +34,7 @@ public class AuthController {
 	// 장점 -> 사용자 편하려고 만든게 아닌 서버 개발자들 편하려고 쓰는거임
 	// 왜 편한가? -> 개인정보를 취급하지 않아도 됨, 인가 작업을 내가 안해도 됨
 
+	@TechUpLogger(type = HistoryType.LOGIN, content = "사용자 로그인")
 	@PostMapping("/login")
 	public ApiResult<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
 		var pair = authService.login(loginRequest.loginId(), loginRequest.password());
